@@ -1,31 +1,39 @@
 apply plugin: 'com.android.library'
 
-    android {
-    compileSdkVersion 29
+android {
+    compileSdkVersion PROP_COMPILE_SDK_VERSION.toInteger()
+    buildToolsVersion PROP_BUILD_TOOLS_VERSION
 
     defaultConfig {
-      minSdkVersion 16
-      targetSdkVersion 29
-      versionCode 1
-      versionName "1.0"
+        minSdkVersion PROP_MIN_SDK_VERSION
+        targetSdkVersion PROP_TARGET_SDK_VERSION
+        versionCode 1
+        versionName "1.0"
 
-      testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-      consumerProguardFiles "consumer-rules.pro"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
-       release {
-           minifyEnabled false
-           proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-       }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
-    }
+}
 
-  dependencies {
-    implementation fileTree (dir: "libs", include: ["*.jar"])
-      implementation 'androidx.appcompat:appcompat:1.1.0'
-      testImplementation 'junit:junit:4.12'
-      androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-      androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-  }
+    implementation 'com.adjust.sdk:adjust-android:4.22.0'
+    implementation 'com.android.installreferrer:installreferrer:2.1'
+    //其他mode已加，暂时就屏蔽
+    //implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
+
+    //如果您希望在应用的web view中使用Adjust SDK，请同时包含以下附加依赖项：
+//    implementation 'com.adjust.sdk:adjust-android-webbridge:4.22.0'
+}
